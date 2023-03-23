@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {CourseListComponent} from "./course-list/course-list.component";
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
+import {RouterLink} from "@angular/router";
 
 
 @NgModule({
@@ -14,7 +15,9 @@ import { FileUploaderComponent } from './file-uploader/file-uploader.component';
   imports: [
     CommonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    RouterLink
   ]
 })
 export class CoursesModule { }

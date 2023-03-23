@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Backend.Data;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CourseContext>(options =>
@@ -11,7 +9,7 @@ builder.Services.AddDbContext<CourseContext>(options =>
 
 builder.Services.AddCors(options => {
     options.AddDefaultPolicy(policy => {
-        policy.WithOrigins("http://localhost:4200");
+        policy.WithOrigins("http://localhost:4200").AllowAnyHeader();
     });
 });
 builder.Services.AddControllers();

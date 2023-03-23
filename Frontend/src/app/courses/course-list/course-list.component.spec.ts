@@ -1,21 +1,10 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import { CourseListComponent } from './course-list.component';
 import {CourseService} from "../services/course.service";
-import {createCourseInstance} from "../course-instance";
-import {createCourse} from "../course";
 import {Observable} from "rxjs";
 import {FormsModule} from "@angular/forms";
 import {MockProvider} from "ng-mocks";
-
-const testCourses = [
-  createCourse({title: 'TestCourse1', duration: 5}),
-  createCourse({title: 'TestCourse2', duration: 5})
-];
-
-const testInstances = [
-  createCourseInstance({course: testCourses[0], startingDate: new Date('2018-10-8')}),
-  createCourseInstance({course: testCourses[1], startingDate: new Date('2018-10-15')})
-];
+import {testInstances} from "../test-data";
 
 describe('CourseListComponent', () => {
   let component: CourseListComponent;

@@ -12,4 +12,8 @@ export class CourseService {
 
   getAll = (): Observable<CourseInstance[]> =>
     this.http.get<CourseInstance[]>(`${environment.API_URL}/instances`);
+
+
+  add = (instances: CourseInstance[]): Observable<CourseInstance[]> =>
+    this.http.post<CourseInstance[]>(`${environment.API_URL}/instances`, instances);
 }

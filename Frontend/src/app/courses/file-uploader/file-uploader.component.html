@@ -1,0 +1,19 @@
+<h2>Cursussen toevoegen</h2>
+<form class="mb-3" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="file" class="form-label">Bestand:</label>
+    <input id="file" type="file" class="form-control" formControlName="file" (change)="onFileChanged($event)"/>
+  </div>
+  <div class="mb-3">
+    <label for="start" class="form-label">Begindatum (optioneel):</label>
+    <input id="start" type="date" class="form-control" formControlName="start">
+  </div>
+  <div class="mb-3">
+    <label for="end" class="form-label">Einddatum (optioneel):</label>
+    <input id="end" type="date" class="form-control" formControlName="end">
+  </div>
+  <button type="submit" [disabled]="!form.valid || processing" class="btn btn-primary">Verstuur</button>
+</form>
+<div *ngIf="message">
+  {{ message }}
+</div>

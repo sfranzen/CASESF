@@ -34,4 +34,36 @@ public class CourseController : ControllerBase
 
         return instance;
     }
+
+    // [HttpPost("instances")]
+    // public async Task<ActionResult<CourseInstance>> PostCourse(CourseInstance instance)
+    // {
+    //     var course = await _context.Course.SingleOrDefaultAsync(c => c.Title == instance.Course.Title);
+    //     if (course is not null)
+    //         instance.Course = course;
+    //
+    //     _context.CourseInstance.Add(instance);
+    //     await _context.SaveChangesAsync();
+    //
+    //     return CreatedAtAction("GetInstance", new { id = instance.Id }, instance);
+    // }
+
+    [HttpPost("instances")]
+    public async Task<ActionResult<IEnumerable<CourseInstance>>> PostCourse([FromBody] List<CourseInstance> instances)
+    {
+        foreach (var instance in instances) {
+            var course = await _context.Course.SingleOrDefaultAsync(c => c.Title == instance.Course.Title);
+
+            if (course is not null) {
+                instance.Course = null!;
+                instance.CourseId = course.Id;
+            }
+
+            // Dit is niet ideaal, maar werkt voor nu om dubbele cursussen te voorkomen
+            _context.CourseInstance.Add(instance);
+            await _context.SaveChangesAsync();
+        }
+
+        return instances;
+    }
 }

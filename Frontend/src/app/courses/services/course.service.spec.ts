@@ -2,19 +2,13 @@ import { TestBed } from '@angular/core/testing';
 
 import { CourseService } from './course.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {createCourse} from "../course";
-import {createCourseInstance} from "../course-instance";
-import {environment} from "../../../environments/environment.development";
+import {environment} from "src/environments/environment.development";
+import {testInstances} from "../test-data";
 
 describe('CourseService', () => {
   let sut: CourseService;
   let http: HttpTestingController;
-  const testCourses = [
-    createCourse({title: 'Test', duration: 5})
-  ];
-  const testInstances = [
-    createCourseInstance({course: testCourses[0], startingDate: new Date('8-10-2018')})
-  ];
+  const url = `${environment.API_URL}/instances`;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -30,13 +24,24 @@ describe('CourseService', () => {
   });
 
   it('#getAll should return all courses', (done: DoneFn) => {
-    sut.getAll().subscribe(courses => {
-      expect(courses).toEqual(testInstances);
+    const expected = testInstances;
+
+    sut.getAll().subscribe(actual => {
+      expect(actual).toEqual(expected);
       done();
     });
 
-    http
-      .expectOne(`${environment.API_URL}/instances`)
-      .flush(testInstances);
+    http.expectOne(url).flush(expected);
+  });
+
+  it('#add should send a POST request', (done: DoneFn) => {
+    const expected = testInstances;
+
+    sut.add(expected).subscribe(actual => {
+      expect(actual).toEqual(expected);
+      done();
+    });
+
+    http.expectOne({url, method: "POST"}).flush(expected);
   });
 });
