@@ -36,7 +36,7 @@ public class CourseController : ControllerBase
     }
 
     // [HttpPost("instances")]
-    // public async Task<ActionResult<CourseInstance>> PostCourse(CourseInstance instance)
+    // public async Task<ActionResult<CourseInstance>> PostInstance(CourseInstance instance)
     // {
     //     var course = await _context.Course.SingleOrDefaultAsync(c => c.Title == instance.Course.Title);
     //     if (course is not null)
@@ -49,7 +49,7 @@ public class CourseController : ControllerBase
     // }
 
     [HttpPost("instances")]
-    public async Task<ActionResult<IEnumerable<CourseInstance>>> PostCourse([FromBody] List<CourseInstance> instances)
+    public async Task<ActionResult<IEnumerable<CourseInstance>>> PostInstance(CourseInstance[] instances)
     {
         foreach (var instance in instances) {
             var course = await _context.Course.SingleOrDefaultAsync(c => c.Title == instance.Course.Title);
