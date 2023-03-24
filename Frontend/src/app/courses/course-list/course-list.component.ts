@@ -45,14 +45,21 @@ export class CourseListComponent implements OnInit {
   update()
   {
     let monday = this.firstDayOfWeek().getTime();
-    this.filteredInstances = this.allInstances.filter(c => {
-      const start = new Date(c.startingDate);
-      const diff = new Date(start.getTime() - monday);
-      return diff.getDate() < 7;
-    });
+    this.filteredInstances = this.allInstances
+      .map(c => {
+        c.startingDate = new Date(c.startingDate);
+        return c;
+      })
+      .filter(c => {
+        const diff = new Date(c.startingDate.getTime() - monday);
+        return diff.getDate() < 7;
+      })
+      .sort((a, b) =>
+        a.startingDate.getTime() - b.startingDate.getTime()
+      );
   }
 
-  private firstDayOfWeek(): Date
+  firstDayOfWeek(): Date
   {
     let date = new Date(this.year, 0, 1);
     const firstMondayOfYear = (8 - date.getDay()) % 7;

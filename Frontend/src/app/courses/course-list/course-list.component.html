@@ -20,7 +20,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let instance of filteredInstances">
-    <td>{{instance.startingDate}}</td>
+    <td>{{instance.startingDate.toLocaleDateString()}}</td>
     <td>{{instance.course.duration}} dagen</td>
     <td>{{instance.course.title}}</td>
   </tr>

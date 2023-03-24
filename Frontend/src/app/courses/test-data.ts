@@ -15,6 +15,14 @@ export const testCourses = [
 export const testInstances = [
   createCourseInstance({
     course: testCourses[0],
+    startingDate: new Date('2018-10-10')
+  }),
+  createCourseInstance({
+    course: testCourses[0],
+    startingDate: new Date('2018-10-9')
+  }),
+  createCourseInstance({
+    course: testCourses[0],
     startingDate: new Date('2018-10-8')
   }),
   createCourseInstance({
